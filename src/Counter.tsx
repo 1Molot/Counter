@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Display, {DisplayPropsType} from "./Display";
 
 
 export const Counter = () => {
@@ -9,15 +10,11 @@ export const Counter = () => {
     }
 
     let resetFunction = () => {
-        setX(x = 0)
+        setX(0)
     }
     return (
         <div className='vau'>
-            <div
-                className='but'
-                style={{color: x === 5 ? "red" : "black", fontSize: x === 5 ? "50px" : "30px"}}
-            >{x}</div
-            >
+            <Display x={x}/>
             <div className='btn'>
                 <button
                     className={x === 5 ? 'disabled' : 'incr'}
