@@ -1,15 +1,15 @@
 import React from 'react';
 
 export type DisplayPropsType = {
-    x: number
+    counter: number
 }
 
-const Display = ({x}: DisplayPropsType) => {
+const Display = ({counter}: DisplayPropsType) => {
     return (
         <div
             className='but'
-            style={{color: x === 5 ? "red" : "black", fontSize: x === 5 ? "50px" : "30px"}}
-        >{x}</div>
+            style={{color: counter === 5 ? "red" : "black", fontSize: counter === 5 ? "50px" : "30px"}}
+        >{counter}</div>
     );
 };
 
