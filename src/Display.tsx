@@ -2,13 +2,16 @@ import React from 'react';
 
 export type DisplayPropsType = {
     counter: number
+    maxValue: number
+    // startValue: number
 }
 
-const Display = ({counter}: DisplayPropsType) => {
+const Display = ({maxValue,counter}: DisplayPropsType) => {
+    console.log(maxValue)
     return (
         <div
             className='but'
-            style={{color: counter === 5 ? "red" : "black", fontSize: counter === 5 ? "50px" : "30px"}}
+            style={{color: counter === +maxValue ? "red" : "black", fontSize: counter === +maxValue ? "50px" : "30px"}}
         >{counter}</div>
     );
 };
