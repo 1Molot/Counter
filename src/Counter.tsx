@@ -12,6 +12,10 @@ export const Counter = () => {
     const resetFunction = () => {
         setCounter(0)
     }
+
+    const  setFunction = () => {
+        // setCounter()
+    }
     return (
         <div className='vau'>
             <Display counter={counter}/>
@@ -26,6 +30,9 @@ export const Counter = () => {
                     disabled={counter === 0}
                     onClick={resetFunction}>Reset
                 </button>
+                <button
+                    className='set'
+                    onClick={setFunction}>Set</button>
             </div>
         </div>
     )
