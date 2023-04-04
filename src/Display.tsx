@@ -3,7 +3,7 @@ import React from 'react';
 export type DisplayPropsType = {
     counter: number
     maxValue: number
-    // startValue: number
+    // minValue:number
 }
 
 const Display = ({maxValue,counter}: DisplayPropsType) => {
