@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Display, {DisplayPropsType} from "./Display";
+import {MinMax} from "./MinMax";
 
 
 export const Counter = () => {
@@ -7,6 +8,7 @@ export const Counter = () => {
     const [setting, setSetting] = useState<{ min: number, max: number }>({min: 0, max: 0})
     const [minValue, setMinValue] = useState<number>(0)
     const [maxValue, setMaxValue] = useState<number>(0)
+    const [isVisible, setIsVisible] = useState<boolean>(false)
 
 
     const startFunction = (e: any) => {
@@ -29,7 +31,7 @@ export const Counter = () => {
     const setFunction = () => {
         setSetting({...setting, min: minValue, max: maxValue})
         setCounter(minValue)
-
+        setIsVisible(prevState => !prevState)
         // setSetting(minValue)
         // localStorage.setItem('counterValue',JSON.stringify(counter))
         // setCounter()
@@ -43,8 +45,13 @@ export const Counter = () => {
 
         <>
             <div className='vau'>
+
                 <Display counter={counter} maxValue={setting.max}/>
                 <div className='btn'>
+                    { isVisible ?   <MinMax maxValue={maxValue} minValue={minValue} maxFunction={maxFunction}
+                                            startFunction={startFunction}
+                                            setFunction={setFunction}/> :
+                        <>
                     <button
                         className={counter === setting.max ? 'disabled' : 'incr'}
                         onClick={incrFunction}
@@ -55,6 +62,9 @@ export const Counter = () => {
                         disabled={counter === setting.min}
                         onClick={resetFunction}>Reset
                     </button>
+                    </>
+                    }
+
                     <button
                         className='set'
                         onClick={setFunction}>Set
@@ -62,15 +72,9 @@ export const Counter = () => {
                 </div>
 
             </div>
-            <div>
-                min value <input type={'number'}
-                                 value={minValue}
-                // disabled={}
-                                 onChange={startFunction}/>
-                max value <input type={'number'}
-                                 value={maxValue}
-                                 onChange={maxFunction}/>
-            </div>
+
         </>
     )
 }
+
+
