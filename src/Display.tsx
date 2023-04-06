@@ -6,7 +6,7 @@ export type DisplayPropsType = {
     // minValue:number
 }
 
-const Display = ({maxValue,counter}: DisplayPropsType) => {
+const Display = ({maxValue, counter}: DisplayPropsType) => {
     console.log(maxValue)
     return (
         <div

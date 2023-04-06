@@ -4,17 +4,16 @@ import Display, {DisplayPropsType} from "./Display";
 
 export const Counter = () => {
     const [counter, setCounter] = useState<number>(0)
-    const [setting, setSetting] = useState<{min:number,max:number}>({min:0,max:0})
+    const [setting, setSetting] = useState<{ min: number, max: number }>({min: 0, max: 0})
     const [minValue, setMinValue] = useState<number>(0)
     const [maxValue, setMaxValue] = useState<number>(0)
 
 
-
     const startFunction = (e: any) => {
-        setMinValue(e.target.value)
+        setMinValue(+e.currentTarget.value)
     }
     const maxFunction = (e: any) => {
-        setMaxValue(e.target.value)
+        setMaxValue(+e.currentTarget.value)
     }
 
     const incrFunction = () => {
@@ -28,7 +27,9 @@ export const Counter = () => {
     }
 
     const setFunction = () => {
-        setSetting({...setting,min:+minValue,max:+maxValue})
+        setSetting({...setting, min: minValue, max: maxValue})
+        setCounter(minValue)
+
         // setSetting(minValue)
         // localStorage.setItem('counterValue',JSON.stringify(counter))
         // setCounter()
@@ -37,20 +38,21 @@ export const Counter = () => {
     }
 
     console.log(setting)
+    console.log(counter)
     return (
 
         <>
             <div className='vau'>
-                <Display counter={setting.min+ counter} maxValue={setting.max}  />
+                <Display counter={counter} maxValue={setting.max}/>
                 <div className='btn'>
                     <button
-                        className={counter === +setting ? 'disabled' : 'incr'}
+                        className={counter === setting.max ? 'disabled' : 'incr'}
                         onClick={incrFunction}
-                        disabled={counter === +setting}>Incr
+                        disabled={counter === setting.max}>Incr
                     </button>
                     <button
-                        className={counter !== +setting ? 'disabled' : 'res'}
-                        disabled={counter === 0}
+                        className={counter !== setting.max ? 'disabled' : 'res'}
+                        disabled={counter === setting.min}
                         onClick={resetFunction}>Reset
                     </button>
                     <button
@@ -62,9 +64,9 @@ export const Counter = () => {
             </div>
             <div>
                 min value <input type={'number'}
-                                   value={minValue}
-                                   // disabled={}
-                                   onChange={startFunction}/>
+                                 value={minValue}
+                // disabled={}
+                                 onChange={startFunction}/>
                 max value <input type={'number'}
                                  value={maxValue}
                                  onChange={maxFunction}/>
