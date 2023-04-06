@@ -12,10 +12,12 @@ export const MinMax = (props: MinMaxType) => {
 
     return (
         <>
-            <input type={'number'}
+            <input className='input'
+                type={'number'}
                    value={props.minValue}
                    onChange={props.startFunction}/>
-            <input type={'number'}
+            <input className='input'
+                type={'number'}
                    value={props.maxValue}
                    onChange={props.maxFunction}/>
         </>
