@@ -6,9 +6,13 @@ import {json} from "stream/consumers";
 
 export const Counter = () => {
     const [counter, setCounter] = useState<number>(0)
-    const [setting, setSetting] = useState<{ min: number, max: number }>({min: 0, max: 0})
+/*    const [setting, setSetting] = useState<{ min: number, max: number }>({min: 0, max: 0})*/
+
+
     const [minValue, setMinValue] = useState<number>(0)
     const [maxValue, setMaxValue] = useState<number>(0)
+
+
     const [isVisible, setIsVisible] = useState<boolean>(false)
     useEffect(()=>{      //загрузиться после отрисовки
       const a = localStorage.getItem('counterItem')  //получаем значение по ключу 'counterItem'
@@ -30,39 +34,40 @@ export const Counter = () => {
     }
 
     const resetFunction = () => {
-        setCounter(0)
+        setCounter(minValue)
         // localStorage.resetItem('counterValue',JSON.stringify(counter))
     }
 
     const setFunction = () => {
         const counterItem = {
-            ...setting, min: minValue, max: maxValue
+           /* ...setting,*/ min: minValue, max: maxValue
         }
         localStorage.setItem('counterItem', JSON.stringify(counterItem))
 
-        setSetting({...setting, min: minValue, max: maxValue})//изменям текущие значения
+    /*    setSetting({...setting, min: minValue, max: maxValue})//изменям текущие значения*/
         setCounter(minValue)
         setIsVisible(prevState => !prevState) //предыдущее значение меняем на противоположное //on-off
     }
     // console.log(setting)
     // console.log(counter)   //isVisible-vidno ili net
+    // const test = minValue < 0 || maxValue < 0 || minValue > maxValue || minValue === maxValue
     return (
         <>
             <div className='vau'>
-                <Display counter={counter} maxValue={setting.max}/>
+                <Display counter={counter} maxValue={maxValue}/>
                 <div className='btn'>
                     {isVisible ? <MinMax maxValue={maxValue} minValue={minValue} maxFunction={maxFunction}
                                          minFunction={minFunction}
                                          setFunction={setFunction}/> :
                         <>
                             <button
-                                className={counter === setting.max ? 'disabled' : 'incr'}
+                                className={counter === maxValue ? 'disabled' : 'incr'}
                                 onClick={incrFunction}
-                                disabled={counter === setting.max}>Incr
+                                disabled={counter === maxValue}>Incr
                             </button>
                             <button
-                                className={counter !== setting.max ? 'disabled' : 'res'}
-                                disabled={counter === setting.min}
+                                className={counter !== maxValue ? 'disabled' : 'res'}
+                                disabled={counter === minValue}
                                 onClick={resetFunction}>Reset
                             </button>
                         </>
@@ -70,6 +75,7 @@ export const Counter = () => {
 
                     <button
                         className='set'
+                        // disabled={test}
                         onClick={setFunction}>Set
                     </button>
                 </div>

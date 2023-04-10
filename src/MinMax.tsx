@@ -29,6 +29,11 @@ export const MinMax = (props: MinMaxType) => {
                        value={props.maxValue}
                        onChange={props.maxFunction}/>
             </div>
+            {/*<button*/}
+            {/*    className='set'*/}
+            {/*    disabled={test}*/}
+            {/*    onClick={setFunction}>Set*/}
+            {/*</button>*/}
         </>
     )
 }
