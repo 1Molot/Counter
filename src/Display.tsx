@@ -5,14 +5,14 @@ export type DisplayPropsType = {
     maxValue: number
     // minValue:number
 }
-
+                  //props
 const Display = ({maxValue, counter}: DisplayPropsType) => {
     console.log(maxValue)
     return (
         <div
             className='but'
             style={{color: counter === +maxValue ? "red" : "black", fontSize: counter === +maxValue ? "50px" : "30px"}}
-        >{counter}</div>
+        >{counter}</div>  //текущее  значение counter
     );
 };
 
