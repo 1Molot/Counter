@@ -77,6 +77,11 @@
     height: 27px;
     cursor: pointer;
     /*margin-top: 5px;*/
+    /*width: 45px;*/
+    /*height: 30px;*/
+    color: white;
+    background-color: green;
+    cursor: pointer;
 }
 
 .disabled {
@@ -92,6 +97,11 @@
 
 .input {
     width: 78px;
+
+}
+
+.warn {
+    background-color: red;
 }
 
 .btn .input:nth-child(2) {

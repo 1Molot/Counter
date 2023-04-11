@@ -7,7 +7,7 @@ export type DisplayPropsType = {
 }
                   //props
 const Display = ({maxValue, counter}: DisplayPropsType) => {
-    console.log(maxValue)
+
     return (
         <div
             className='but'
