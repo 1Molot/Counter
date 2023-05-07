@@ -7,9 +7,9 @@ function App() {
     return (
         <div className="App">
             <Counter />
-
         </div>
     );
 }
+//store v provider store={store}
 
 export default App;
