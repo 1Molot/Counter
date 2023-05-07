@@ -46,7 +46,6 @@ export const counterReducer = (state = initialState, action: ActionsType): Initi
             return {
                 ...state, counter:action.minValue
             }
-
         default:
             return state
     }

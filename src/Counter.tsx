@@ -17,41 +17,45 @@ import {
 export type CountStateType = {
     [key: string]: Array<CountStateType>
 }
+type CounterItemType = {
+    min: number,
+    max: number
+}
 
 export const Counter = () => {
 
-    const counter = useSelector<AppRootStateType,number>(state => state.counter.counter)
-    const minValue = useSelector<AppRootStateType,number>(state => state.counter.minValue)
-    const maxValue = useSelector<AppRootStateType,number>(state => state.counter.maxValue)
-    const isVisible = useSelector<AppRootStateType,boolean>(state => state.counter.isVisible)
+    const counter = useSelector<AppRootStateType, number>(state => state.counter.counter)
+    const minValue = useSelector<AppRootStateType, number>(state => state.counter.minValue)
+    const maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue)
+    const isVisible = useSelector<AppRootStateType, boolean>(state => state.counter.isVisible)
 
     const dispatch = useDispatch()
 
     // const [counter, setCounter] = useState<number>(0)
-    //
-    // const [minValue, setMinValue] = useState<number>(0)
-    //
-    // const [maxValue, setMaxValue] = useState<number>(0)
-    //
-    // const [isVisible, setIsVisible] = useState<boolean>(false)
+    //    // const [minValue, setMinValue] = useState<number>(0)
+    //    // const [maxValue, setMaxValue] = useState<number>(0)
+    //    // const [isVisible, setIsVisible] = useState<boolean>(false)
 
-    // useEffect(() => {      //загрузиться после отрисовки
-    //     const counterItem = localStorage.getItem('counterItem')  //получаем значение по ключу 'counterItem'
-    //     // const b = counterItem ? JSON.parse(counterItem) : {}
-    //     if (counterItem) {
-    //         const currentItem = JSON.parse(counterItem);
-    //         setMinValue(currentItem.min)       //текущие значения в input
-    //         setMaxValue(currentItem.max)
-    //         setCounter(currentItem.min);
-    //     }
-    // }, [])
+    useEffect(() => {      //загрузиться после отрисовки
+        const counterItem = localStorage.getItem('counterItem')  //получаем значение по ключу 'counterItem'
+        // const b = counterItem ? JSON.parse(counterItem) : {}
+        if (counterItem) {
+            const currentItem:CounterItemType = JSON.parse(counterItem);
+            dispatch(setMinValueAC(currentItem.min))
+            // setMinValue(currentItem.min)     //текущие значения в input
+            // setMaxValue(currentItem.max)
+            dispatch(setMaxValueAC(currentItem.max))
+            // setCounter(currentItem.min);
+            dispatch(setCounterAC(currentItem.min))
+        }
+    }, [])
 
-                    //(e: ChangeEvent<HTMLInputElement>)
+    //(e: ChangeEvent<HTMLInputElement>)
     const minFunction = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setMinValueAC(+e.currentTarget.value))
         // setMinValue(+e.currentTarget.value) //текущие значения в input
     }
-             //(e: ChangeEvent<HTMLInputElement>)
+    //(e: ChangeEvent<HTMLInputElement>)
     const maxFunction = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(setMaxValueAC(+e.currentTarget.value))
         // setMaxValue(+e.currentTarget.value)
